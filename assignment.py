@@ -1,23 +1,56 @@
+import random 
 import pygame 
 
 pygame.init()
 
-WIDTH = 900
-HEIGHT = 950
-screen = pygame.display.set_model({WIDTH, HEIGHT})
-timer = pygame.time.Clock()
+width = 600
+height = 600
+white = (255, 255, 255)
+black = (0, 0, 0)
+blue = (0, 0, 255)
+green = (0, 255, 0)
+gray = (128, 128, 128)
 fps = 120
-font = pygame.front.Front('freesanbold.ttf', 20)
+timer = pygame.time.Clock()
+row = 6
+cols = 8
+correct = [[0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0],
+           [0, 0, 0, 0, 0, 0, 0, 0], 
+           [0, 0, 0, 0, 0, 0, 0, 0]
+]
 
-run = True 
-while run:
-    timer.tick(fps)
-    screen.fill('black')
+options_list = []
+space = []
+used = []
+new_board = True 
+first_guess = False
+second_guess = False
+first_guest_num = 0 
+second_guest_num = 0 
+score = 0 
+best_score = 0 
+matches = 0 
+game_over = False
+screen = pygame.display.set_mode([width, height])
+pygame.display.set_caption('Matching Game!')
+title_fon = pygame.front.Font('freesansbold.ttf', 56)
+small_front = pygame.front.Front('freesansbold.ttf', 26)
 
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            run == False 
+def generate_board():
+    global options_list 
+    global space 
+    global used 
+    for item in range (row * cols // 2):
+        options_list.append(item)
 
-    pygame.display.flip()
-pygame.quit()
- 
+        for item in range (row * cols): 
+            piece = options_list[random.randint(0, len(options_list) -1 )]
+            space.append(piece)
+            if piece in used:
+                used.remove(piece)
+                options_list.remove(piece)
+            else:
+                used.append(piece)
