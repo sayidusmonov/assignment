@@ -5,15 +5,16 @@ import pygame
 pygame.init()
 
 # game variables and constants
-widht = 600
+width = 600
 height = 600
 white = (255, 255, 255)
 black = (0, 0, 0)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 gray = (128, 128, 128)
-fps = 60
+fps = 120
 timer = pygame.time.Clock()
+# Game  settings 
 rows = 6
 cols = 8
 correct = [[0, 0, 0, 0, 0, 0, 0, 0],
@@ -36,7 +37,7 @@ matches = 0
 game_over = False
 
 # create screen
-screen = pygame.display.set_mode([widht, height])
+screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('Matching Game!')
 title_font = pygame.font.Font('freesansbold.ttf', 56)
 small_font = pygame.font.Font('freesansbold.ttf', 26)
@@ -60,11 +61,11 @@ def generate_board():
 
 
 def draw_backgrounds():
-    top_menu = pygame.draw.rect(screen, black, [0, 0, widht, 100])
+    top_menu = pygame.draw.rect(screen, black, [0, 0, width, 100])
     title_text = title_font.render('The Matching Game!', True, white)
     screen.blit(title_text, (10, 20))
-    board_space = pygame.draw.rect(screen, gray, [0, 100, widht, height - 200], 0)
-    bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, widht, 100], 0)
+    board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
+    bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
     restart_button = pygame.draw.rect(screen, gray, [10, height - 90, 200, 80], 0, 5)
     restart_text = title_font.render('Restart', True, white)
     screen.blit(restart_text, (10, 520))
@@ -96,7 +97,7 @@ def draw_board():
 
 
 def check_guesses(first, second):
-    global spaces
+    global space
     global correct
     global score
     global matches
@@ -164,7 +165,7 @@ while running:
 
     if matches == rows * cols // 2:
         game_over = True
-        winner = pygame.draw.rect(screen, gray, [10, height - 300, widht - 20, 80], 0, 5)
+        winner = pygame.draw.rect(screen, gray, [10, height - 300, width - 20, 80], 0, 5)
         winner_text = title_font.render(f'Your score is {score} !', True, white)
         screen.blit(winner_text, (10, height - 290))
         if best_score > score or best_score == 0:
@@ -178,7 +179,7 @@ while running:
 
     if second_guess:
         piece_text = small_font.render(f'{space[second_guess_num]}', True, blue)
-        location = (second_guess_num // rows * 75 + 18, (second_guess_num - (second_guess_num // rows * rows)) * 65 + 120)
+        location = (second_guess_num // rows * 75 + 18, (second_guess_num - (second_guess_num // rows * rows)) * 65 +)
         screen.blit(piece_text, (location))
 
     pygame.display.flip()
