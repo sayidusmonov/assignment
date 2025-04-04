@@ -36,7 +36,7 @@ best_score = 0
 matches = 0
 game_over = False
 
-# create screen
+#screen
 screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('Matching Game!')
 title_font = pygame.font.Font('freesansbold.ttf', 56)
