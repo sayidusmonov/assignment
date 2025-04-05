@@ -61,19 +61,12 @@ def generate_board():
 
 
 def draw_backgrounds():
+    mouse_pos = pygame.mouse.get_pos()
     top_menu = pygame.draw.rect(screen, black, [0, 0, width, 100])
-    title_text = title_font.render('The Matching Game!', True, white)
-    screen.blit(title_text, (10, 20))
+    title_text = title_font.render('The Matching Game!', True, white )
+    screen.blit (title_text(10, 20))
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
-    bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
-    restart_button = pygame.draw.rect(screen, gray, [10, height - 90, 200, 80], 0, 5)
-    restart_text = title_font.render('Restart', True, white)
-    screen.blit(restart_text, (10, 520))
-    score_text = small_font.render(f'Current Turns: {score}', True, white)
-    screen.blit(score_text, (350, 520))
-    best_text = small_font.render(f'Previous Best: {best_score}', True, white)
-    screen.blit(best_text, (350, 560))
-    return restart_button
+
 
 
 def draw_board():
