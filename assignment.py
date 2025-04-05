@@ -76,6 +76,12 @@ def draw_backgrounds():
     restart_text = title_font.render('RESTART', True, white)
     screen.blit(restart_text(10, 520))
 
+    score_text = small_font.render(f'CURRENT TURNS:{score}', True, white)
+    screen.blint(score_text, (350, 520))
+    best_text = small_font.render(f'PREVIOUS BEST: {best_score}', True, white)
+    screen.blit(best_text, (350, 560))
+    return restart_button
+
 
 def draw_board():
     global rows
