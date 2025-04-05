@@ -99,6 +99,13 @@ def fade_in ():
         fade_in()
         new_board = False
 
+def flip_card_animation(index):
+    col = index // rows
+    rows = index % rows
+    x = col * 76 / 12
+    y = rows * 65 / 112
+    card_value = space[index]
+    
 def draw_board():
     global rows
     global cols
