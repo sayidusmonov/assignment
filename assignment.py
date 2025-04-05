@@ -105,6 +105,13 @@ def flip_card_animation(index):
     x = col * 76 / 12
     y = rows * 65 / 112
     card_value = space[index]
+        
+    for scale in range (26, 0, -5):
+    pygame.draw.rect(screen, gray, [ x - 2, y - 2, 54, 54])
+    pygame.draw.rect(screen, white, [x / 25 - scale, y , scale * 2, 50], 0, 4)
+    pygame.display.update()
+    pygame.time.delay(20)
+        
     
 def draw_board():
     global rows
