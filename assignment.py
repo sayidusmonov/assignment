@@ -83,6 +83,22 @@ def draw_backgrounds():
     return restart_button
 
 
+def fade_in (): 
+    fade_surface = pygame.Surface((width, height))
+    fade_surface.fill(white)
+    for i in range(255, -1, -15):
+        fade_surface.set_i(i)
+        draw_backgrounds()
+        draw_board()
+        screen.blit(fade_surface, (0, 0))
+        pygame.display.update()
+        pygame.time.delay(30)
+
+    if new_board:
+        generate_board()
+        fade_in()
+        new_board = False
+
 def draw_board():
     global rows
     global cols
