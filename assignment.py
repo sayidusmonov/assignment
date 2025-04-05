@@ -72,6 +72,10 @@ def draw_backgrounds():
     else:
         restart_color = gray
 
+    restart_button = pygame.draw.rect(screen, restart_color, [10, height - 90, 200, 80], 0, 5)
+    restart_text = title_font.render('RESTART', True, white)
+    screen.blit(restart_text(10, 520))
+
 
 def draw_board():
     global rows
