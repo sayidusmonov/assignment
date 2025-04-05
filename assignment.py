@@ -67,6 +67,10 @@ def draw_backgrounds():
     screen.blit (title_text(10, 20))
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
 
+    if 10 <= mouse_pos[0] <=210 and height - 90 <= mouse_pos[1] <= height - 10:
+        restart_color = (180, 180, 180)
+    else:
+        restart_color = gray
 
 
 def draw_board():
