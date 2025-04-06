@@ -121,6 +121,14 @@ def flip_card_animation(index):
             screen.blit(text, text_rect)
         pygame.displa.update()
         pygame.time.delay(20)
+
+    if button.collidepoint(event.pos) and not first_guess:
+       first_guess = True
+       first_guess_num = i 
+    if button.collidepoint(event.pos) and not second_guess and first_guess and i != first_guess_num:
+        second_guess = True
+        second_guess_num = i 
+
     
 def draw_board():
     global rows
