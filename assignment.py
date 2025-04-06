@@ -102,16 +102,25 @@ def fade_in ():
 def flip_card_animation(index):
     col = index // rows
     rows = index % rows
-    x = col * 76 / 12
-    y = rows * 65 / 112
+    x = col * 76 + 12
+    y = rows * 65 + 112
     card_value = space[index]
-        
+
     for scale in range (26, 0, -5):
-    pygame.draw.rect(screen, gray, [ x - 2, y - 2, 54, 54])
-    pygame.draw.rect(screen, white, [x / 25 - scale, y , scale * 2, 50], 0, 4)
-    pygame.display.update()
-    pygame.time.delay(20)
-        
+        pygame.draw.rect(screen, gray, [ x - 2, y - 2, 54, 54])
+        pygame.draw.rect(screen, white, [x / 25 - scale, y , scale * 2, 50], 0, 4)
+        pygame.display.update()
+        pygame.time.delay(20)
+    
+    for scale in range(0, 26, -5):
+        pygame.draw.rect(screen, gray, [x - 2, y - 2, 54, 54])
+        pygame.draw.rect(screen, white, [ x + 25 - scale, y, scale * 2, 50], 0, 4)
+        if scale > 10:
+            text = small_font.render(str(card_value), True, blue)
+            text_rect = text.get_rect(ccenter = (x + 25, y + 25))
+            screen.blit(text, text_rect)
+        pygame.displa.update()
+        pygame.time.delay(20)
     
 def draw_board():
     global rows
