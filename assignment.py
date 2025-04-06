@@ -61,24 +61,17 @@ def generate_board():
 
 
 def draw_backgrounds():
-    mouse_pos = pygame.mouse.get_pos()
     top_menu = pygame.draw.rect(screen, black, [0, 0, width, 100])
-    title_text = title_font.render('The Matching Game!', True, white )
-    screen.blit (title_text(10, 20))
+    title_text = title_font.render('The Matching Game!', True, white)
+    screen.blit(title_text, (10, 20))
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
-
-    if 10 <= mouse_pos[0] <=210 and height - 90 <= mouse_pos[1] <= height - 10:
-        restart_color = (180, 180, 180)
-    else:
-        restart_color = gray
-
-    restart_button = pygame.draw.rect(screen, restart_color, [10, height - 90, 200, 80], 0, 5)
-    restart_text = title_font.render('RESTART', True, white)
-    screen.blit(restart_text(10, 520))
-
-    score_text = small_font.render(f'CURRENT TURNS:{score}', True, white)
-    screen.blint(score_text, (350, 520))
-    best_text = small_font.render(f'PREVIOUS BEST: {best_score}', True, white)
+    bottom_menu = pygame.draw.rect(screen, black, [0, height- 100, width, 100], 0)
+    restart_button = pygame.draw.rect(screen, gray, [10,height - 90, 200, 80], 0, 5)
+    restart_text = title_font.render('Restart', True, white)
+    screen.blit(restart_text, (10, 520))
+    score_text = small_font.render(f'Current Turns: {score}', True, white)
+    screen.blit(score_text, (350, 520))
+    best_text = small_font.render(f'Previous Best: {best_score}', True, white)
     screen.blit(best_text, (350, 560))
     return restart_button
 
@@ -233,7 +226,7 @@ while running:
 
     if second_guess:
         piece_text = small_font.render(f'{space[second_guess_num]}', True, blue)
-        location = (second_guess_num // rows * 75 + 18, (second_guess_num - (second_guess_num // rows * rows)) * 65 +)
+        location = (second_guess_num // rows * 75 + 18, (second_guess_num - (second_guess_num // rows * rows)) * 65 + 120)
         screen.blit(piece_text, (location))
 
     pygame.display.flip()
