@@ -31,9 +31,8 @@ score = 0
 best_score = 0
 matches = 0
 game_over = False
-flip_in_progress = False  # Track if a flip is in progress
-button_hovered = False  # Track if the mouse is hovering over the restart button
-
+flip_in_progress = False  
+button_hovered = False  
 # Screen setup
 screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('Matching Game!')
@@ -64,7 +63,7 @@ def draw_backgrounds():
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
     bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
     
-    # Restart Button with hover effect
+   
     restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200),
                                       [10, height - 90, 200, 80], 0, 5)
     restart_text = title_font.render('Restart', True, white)
@@ -79,29 +78,28 @@ def draw_backgrounds():
 def flip_card_animation(index):
     global flip_in_progress
     if flip_in_progress:
-        return  # Prevent another flip while one is in progress
+        return  
 
-    flip_in_progress = True  # Mark that a flip is in progress
+    flip_in_progress = True  
     col = index // rows
     row = index % rows
     x = col * 76 + 12
     y = row * 65 + 112
     card_value = space[index]
 
-    # Animate flip (flip over to show back, then front)
+    
     for scale in range(0, 26, 5):
-        pygame.draw.rect(screen, gray, [x - 2, y - 2, 54, 54])  # border
-        pygame.draw.rect(screen, white, [x + 25 - scale, y, scale * 2, 50], 0, 4)  # flip effect
+        pygame.draw.rect(screen, gray, [x - 2, y - 2, 54, 54])  
+        pygame.draw.rect(screen, white, [x + 25 - scale, y, scale * 2, 50], 0, 4)  
         pygame.display.update()
         pygame.time.delay(20)
         
-    # After flip, show the card value
     text = small_font.render(str(card_value), True, blue)
     screen.blit(text, (x + 18, y + 12))
     pygame.display.update()
 
-    pygame.time.delay(500)  # Pause to let the player see the card value
-    flip_in_progress = False  # Allow for the next flip after the animation
+    pygame.time.delay(500)  
+    flip_in_progress = False  
 
 def draw_board():
     global rows
@@ -151,7 +149,7 @@ while running:
     restart = draw_backgrounds()
     board = draw_board()
 
-    # Check for card matches if two cards have been flipped
+    
     if first_guess is not None and second_guess is not None:
         check_guesses()
 
@@ -164,10 +162,10 @@ while running:
                 if not game_over:
                     if button.collidepoint(event.pos) and first_guess is None:
                         first_guess = i
-                        flip_card_animation(i)  # Flip first card
+                        flip_card_animation(i) 
                     elif button.collidepoint(event.pos) and second_guess is None and i != first_guess:
                         second_guess = i
-                        flip_card_animation(i)  # Flip second card
+                        flip_card_animation(i)  
 
             if restart.collidepoint(event.pos):
                 options_list = []
@@ -187,7 +185,6 @@ while running:
                 game_over = False
 
         if event.type == pygame.MOUSEMOTION:
-            # Check if the mouse is hovering over the restart button
             button_hovered = restart.collidepoint(event.pos)
 
     if matches == rows * cols // 2:
