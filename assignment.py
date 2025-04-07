@@ -167,9 +167,10 @@ def check_guesses():
         # adds a turn to incorrect guess
         score += 1 
 
+    # Resets guess
     first_guess = None
     second_guess = None
-
+# loads the score from the file 
 load_best_score()
 
 running = True
