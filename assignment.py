@@ -179,6 +179,7 @@ while running:
     timer.tick(fps)
     screen.fill(white)
     if new_board:
+        # generates a new board of cards  
         generate_board()
         new_board = False
 
