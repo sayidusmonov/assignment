@@ -1,9 +1,9 @@
 import random
 import pygame
+import os
 
 pygame.init()
 
-# Game variables and constants
 width = 600
 height = 600
 white = (255, 255, 255)
@@ -31,13 +31,36 @@ score = 0
 best_score = 0
 matches = 0
 game_over = False
-flip_in_progress = False  
-button_hovered = False  
-# Screen setup
+flip_in_progress = False
+button_hovered = False
+
 screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('Matching Game!')
 title_font = pygame.font.Font('freesansbold.ttf', 56)
 small_font = pygame.font.Font('freesansbold.ttf', 26)
+
+def load_best_score():
+    global best_score
+    try:
+        if os.path.exists("best_score.txt"):
+            with open("best_score.txt", "r") as file:
+                score_data = file.read().strip()
+                if score_data.isdigit():  
+                    best_score = int(score_data)
+                else:
+                    best_score = 0
+        else:
+            best_score = 0
+    except Exception as e:
+        print(f"Error loading best score: {e}")
+        best_score = 0
+
+def save_best_score():
+    try:
+        with open("best_score.txt", "w") as file:
+            file.write(str(best_score))
+    except Exception as e:
+        print(f"Error saving best score: {e}")
 
 def generate_board():
     global options_list
@@ -63,7 +86,6 @@ def draw_backgrounds():
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
     bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
     
-   
     restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200),
                                       [10, height - 90, 200, 80], 0, 5)
     restart_text = title_font.render('Restart', True, white)
@@ -78,19 +100,18 @@ def draw_backgrounds():
 def flip_card_animation(index):
     global flip_in_progress
     if flip_in_progress:
-        return  
+        return
 
-    flip_in_progress = True  
+    flip_in_progress = True
     col = index // rows
     row = index % rows
     x = col * 76 + 12
     y = row * 65 + 112
     card_value = space[index]
 
-    
     for scale in range(0, 26, 5):
-        pygame.draw.rect(screen, gray, [x - 2, y - 2, 54, 54])  
-        pygame.draw.rect(screen, white, [x + 25 - scale, y, scale * 2, 50], 0, 4)  
+        pygame.draw.rect(screen, gray, [x - 2, y - 2, 54, 54])
+        pygame.draw.rect(screen, white, [x + 25 - scale, y, scale * 2, 50], 0, 4)
         pygame.display.update()
         pygame.time.delay(20)
         
@@ -98,8 +119,8 @@ def flip_card_animation(index):
     screen.blit(text, (x + 18, y + 12))
     pygame.display.update()
 
-    pygame.time.delay(500)  
-    flip_in_progress = False  
+    pygame.time.delay(500)
+    flip_in_progress = False
 
 def draw_board():
     global rows
@@ -138,6 +159,8 @@ def check_guesses():
     first_guess = None
     second_guess = None
 
+load_best_score()
+
 running = True
 while running:
     timer.tick(fps)
@@ -149,7 +172,6 @@ while running:
     restart = draw_backgrounds()
     board = draw_board()
 
-    
     if first_guess is not None and second_guess is not None:
         check_guesses()
 
@@ -162,10 +184,10 @@ while running:
                 if not game_over:
                     if button.collidepoint(event.pos) and first_guess is None:
                         first_guess = i
-                        flip_card_animation(i) 
+                        flip_card_animation(i)
                     elif button.collidepoint(event.pos) and second_guess is None and i != first_guess:
                         second_guess = i
-                        flip_card_animation(i)  
+                        flip_card_animation(i)
 
             if restart.collidepoint(event.pos):
                 options_list = []
@@ -194,6 +216,8 @@ while running:
         screen.blit(winner_text, (10, height - 290))
         if best_score > score or best_score == 0:
             best_score = score
+            save_best_score()
 
     pygame.display.flip()
+
 pygame.quit()
