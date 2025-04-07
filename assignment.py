@@ -148,7 +148,7 @@ def draw_board():
                 screen.blit(piece_text, (c * 75 + 18, r * 65 + 120))
 
     return board_list
-# it compares two guessed cards to see if the are matching, if not it adds turn to the score 
+# it compares two guessed cards and see if they are match if 
 def check_guesses():
     global first_guess, second_guess, score, matches
     if space[first_guess] == space[second_guess]:
@@ -159,22 +159,17 @@ def check_guesses():
         if correct[row1][col1] == 0 and correct[row2][col2] == 0:
             correct[row1][col1] = 1
             correct[row2][col2] = 1
-            #  adds a score  to the match 
             score += 1
-            # increases match count 
             matches += 1
     else:
-        # adds a turn to incorrect guess
-        score += 1 
-    # Resets guess
+        score += 1
+
     first_guess = None
     second_guess = None
-# loads the score from the file 
+
 load_best_score()
 
-# loop 
 running = True
-# Control frame rate and clean 
 while running:
     timer.tick(fps)
     screen.fill(white)
@@ -187,7 +182,7 @@ while running:
 
     if first_guess is not None and second_guess is not None:
         check_guesses()
-    #  error handling, checks player  input 
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -227,7 +222,6 @@ while running:
         winner = pygame.draw.rect(screen, gray, [10, height - 300, width - 20, 80], 0, 5)
         winner_text = title_font.render(f'Your score is {score} !', True, white)
         screen.blit(winner_text, (10, height - 290))
-        #  it saves a best score if necessary
         if best_score > score or best_score == 0:
             best_score = score
             save_best_score()
