@@ -94,7 +94,8 @@ def draw_backgrounds():
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
     bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
     
-    restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200), [10, height - 90, 200, 80], 0, 5)
+    restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200),
+                                      [10, height - 90, 200, 80], 0, 5)
     restart_text = title_font.render('Restart', True, white)
     screen.blit(restart_text, (10, height - 90 + 20))
 
@@ -103,7 +104,6 @@ def draw_backgrounds():
     best_text = small_font.render(f'Previous Best: {best_score}', True, white)
     screen.blit(best_text, (350, 560))
     return restart_button
-           
 # this is a flip animation which is help to flipping cards 
 def flip_card_animation(index):
     global flip_in_progress
@@ -129,7 +129,6 @@ def flip_card_animation(index):
 
     pygame.time.delay(500)
     flip_in_progress = False
-           
 #  it shows the board  and matched cards with ther numbers 
 def draw_board():
     global rows
@@ -149,7 +148,7 @@ def draw_board():
                 screen.blit(piece_text, (c * 75 + 18, r * 65 + 120))
 
     return board_list
-
+# it compares two guessed cards to see if the are matching, if not it adds turn to the score 
 def check_guesses():
     global first_guess, second_guess, score, matches
     if space[first_guess] == space[second_guess]:
