@@ -159,10 +159,13 @@ def check_guesses():
         if correct[row1][col1] == 0 and correct[row2][col2] == 0:
             correct[row1][col1] = 1
             correct[row2][col2] = 1
+  #  adds a score  to the match 
             score += 1
+            # increases match count 
             matches += 1
     else:
-        score += 1
+        # adds a turn to incorrect guess
+        score += 1 
 
     first_guess = None
     second_guess = None
