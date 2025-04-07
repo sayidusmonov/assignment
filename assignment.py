@@ -4,18 +4,21 @@ import pygame
 import os
 
 pygame.init()
-
+# screen setting size 
 width = 600
 height = 600
+#colloring option for the game                                                   
 white = (255, 255, 255)
 black = (0, 0, 0)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 gray = (128, 128, 128)
-fps = 60
+fps = 120
 timer = pygame.time.Clock()
+# Grid size, 6 rows and 8 columns
 rows = 6
 cols = 8
+# This list keeps track of which cards have been matched
 correct = [[0, 0, 0, 0, 0, 0, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0],
            [0, 0, 0, 0, 0, 0, 0, 0],
