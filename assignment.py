@@ -159,27 +159,26 @@ def check_guesses():
         if correct[row1][col1] == 0 and correct[row2][col2] == 0:
             correct[row1][col1] = 1
             correct[row2][col2] = 1
-  #  adds a score  to the match 
+            #  adds a score  to the match 
             score += 1
             # increases match count 
             matches += 1
     else:
         # adds a turn to incorrect guess
         score += 1 
-
     # Resets guess
     first_guess = None
     second_guess = None
 # loads the score from the file 
 load_best_score()
+
 # loop 
 running = True
- # Control frame rate and clean
+# Control frame rate and clean 
 while running:
     timer.tick(fps)
     screen.fill(white)
     if new_board:
-        # generates a new board of cards  
         generate_board()
         new_board = False
 
@@ -188,7 +187,7 @@ while running:
 
     if first_guess is not None and second_guess is not None:
         check_guesses()
-
+    #  error handling, checks player  input 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -228,6 +227,7 @@ while running:
         winner = pygame.draw.rect(screen, gray, [10, height - 300, width - 20, 80], 0, 5)
         winner_text = title_font.render(f'Your score is {score} !', True, white)
         screen.blit(winner_text, (10, height - 290))
+        #  it saves a best score if necessary
         if best_score > score or best_score == 0:
             best_score = score
             save_best_score()
@@ -235,4 +235,3 @@ while running:
     pygame.display.flip()
 
 pygame.quit()
-
