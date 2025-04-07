@@ -172,8 +172,9 @@ def check_guesses():
     second_guess = None
 # loads the score from the file 
 load_best_score()
-
+# loop 
 running = True
+ # Control frame rate
 while running:
     timer.tick(fps)
     screen.fill(white)
