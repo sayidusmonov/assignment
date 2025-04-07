@@ -174,7 +174,7 @@ def check_guesses():
 load_best_score()
 # loop 
 running = True
- # Control frame rate
+ # Control frame rate and clean
 while running:
     timer.tick(fps)
     screen.fill(white)
