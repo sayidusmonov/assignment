@@ -32,6 +32,7 @@ best_score = 0
 matches = 0
 game_over = False
 flip_in_progress = False  # Track if a flip is in progress
+button_hovered = False  # Track if the mouse is hovering over the restart button
 
 # Screen setup
 screen = pygame.display.set_mode([width, height])
@@ -56,14 +57,19 @@ def generate_board():
             used.append(piece)
 
 def draw_backgrounds():
+    global button_hovered
     top_menu = pygame.draw.rect(screen, black, [0, 0, width, 100])
     title_text = title_font.render('The Matching Game!', True, white)
     screen.blit(title_text, (10, 20))
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
     bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
-    restart_button = pygame.draw.rect(screen, gray, [10, height - 90, 200, 80], 0, 5)
+    
+    # Restart Button with hover effect
+    restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200),
+                                      [10, height - 90, 200, 80], 0, 5)
     restart_text = title_font.render('Restart', True, white)
-    screen.blit(restart_text, (10, 520))
+    screen.blit(restart_text, (10, height - 90 + 20))
+
     score_text = small_font.render(f'Current Turns: {score}', True, white)
     screen.blit(score_text, (350, 520))
     best_text = small_font.render(f'Previous Best: {best_score}', True, white)
@@ -179,6 +185,10 @@ while running:
                            [0, 0, 0, 0, 0, 0, 0, 0],
                            [0, 0, 0, 0, 0, 0, 0, 0]]
                 game_over = False
+
+        if event.type == pygame.MOUSEMOTION:
+            # Check if the mouse is hovering over the restart button
+            button_hovered = restart.collidepoint(event.pos)
 
     if matches == rows * cols // 2:
         game_over = True
