@@ -38,11 +38,13 @@ game_over = False
 flip_in_progress = False
 button_hovered = False
 
+# this part for screen and fonts
 screen = pygame.display.set_mode([width, height])
 pygame.display.set_caption('Matching Game!')
 title_font = pygame.font.Font('freesansbold.ttf', 56)
 small_font = pygame.font.Font('freesansbold.ttf', 26)
 
+# this part for file handling and error handling
 def load_best_score():
     global best_score
     try:
@@ -66,6 +68,8 @@ def save_best_score():
     except Exception as e:
         print(f"Error saving best score: {e}")
 
+
+# creates a game board of cards with randomly placed matching numbers
 def generate_board():
     global options_list
     global space
@@ -100,7 +104,7 @@ def draw_backgrounds():
     best_text = small_font.render(f'Previous Best: {best_score}', True, white)
     screen.blit(best_text, (350, 560))
     return restart_button
-
+# this is a flip animation which is help to flipping cards 
 def flip_card_animation(index):
     global flip_in_progress
     if flip_in_progress:
