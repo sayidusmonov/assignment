@@ -94,8 +94,7 @@ def draw_backgrounds():
     board_space = pygame.draw.rect(screen, gray, [0, 100, width, height - 200], 0)
     bottom_menu = pygame.draw.rect(screen, black, [0, height - 100, width, 100], 0)
     
-    restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200),
-                                      [10, height - 90, 200, 80], 0, 5)
+    restart_button = pygame.draw.rect(screen, gray if not button_hovered else (200, 200, 200), [10, height - 90, 200, 80], 0, 5)
     restart_text = title_font.render('Restart', True, white)
     screen.blit(restart_text, (10, height - 90 + 20))
 
